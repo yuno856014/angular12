@@ -1,0 +1,29 @@
+
+<div class="container">
+  <div class="row d-flex justify-content-center mt-5">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card py-3 px-2">
+              <form class="myform" [formGroup]="loginForm" (ngSubmit)="login()">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Tên Đăng Nhập</label>
+                    <input type="userName" formControlName="userName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Tên đăng nhập">
+                    <small id="emailHelp" class="form-text text-muted"></small><br>
+                    <span class="text-danger" *ngIf="loginForm.controls['userName'].dirty && loginForm.hasError('required','userName')">*Email address is required</span>
+                    <span class="text-danger" *ngIf="loginForm.hasError('userName','userName')">*Email is Invalid</span> </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Mật khẩu</label>
+                    <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu">
+                    <span class="text-danger" *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">*Password is required</span>
+                   </div>
+                  <div class="row">
+                      <div class="col-md-6 col-12">
+                          <div class="form-group form-check"> <input type="checkbox" class="form-check-input" id="exampleCheck1"> <label class="form-check-label" for="exampleCheck1">Remember me</label> </div>
+                      </div>
+                  </div>
+                  <div class="form-group mt-3"> <button type="submit" [disabled]="!loginForm.valid" class="btn btn-block btn-primary btn-lg">Đăng nhập</button></div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+

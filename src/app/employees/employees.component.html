@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <button
+        kendoButton
+        type="button"
+        class="float-right"
+        themeColor="primary"
+        data-toggle="modal"
+        data-target="#myModal"
+        (click)="addClick()"
+        data-backdrop="static"
+        data-keyboard="false"
+      >
+        <i class="fa-solid fa-plus"></i> Thêm
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <app-dropdown-dep></app-dropdown-dep>
+      </div>
+      <div class="col-10">
+        <kendo-grid
+          [data]="EmpList"
+          [kendoGridBinding]="EmpList"
+          [filterable]="true"
+          [pageSize]="10"
+          [pageable]="true"
+          data-toggle="modal"
+          data-target="#myModal"
+          (cellClick)="editClick($event)"
+          data-backdrop="static"
+          data-keyboard="false"
+        >
+          <kendo-grid-column
+            field="id"
+            title="Mã Nhân Viên"
+          ></kendo-grid-column>
+          <kendo-grid-column field="empLastName" title="Họ và Tên">
+            <ng-template kendoGridCellTemplate let-Emplist>
+              <span> {{ Emplist.empLastName }}</span>
+              <span> {{ Emplist.empName }}</span>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="departmentId" title="Tên Phòng Ban">
+            <ng-template kendoGridCellTemplate let-Emplist>
+              <span *ngFor="let item of DepartmentList">
+                <span *ngIf="item.id == Emplist.departmentId">
+                  {{ item.departmentName }}
+                </span>
+              </span>
+            </ng-template>
+          </kendo-grid-column>
+          <kendo-grid-column field="position" title="Chức Vụ">
+          </kendo-grid-column>
+          <kendo-grid-column field="title" title="Chức Danh">
+          </kendo-grid-column>
+        </kendo-grid>
+      </div>
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{ ModalTitle }}</h4>
+              <button
+                type="button"
+                (click)="closeClick()"
+                class="close"
+                data-dismiss="modal"
+              >
+                &times;
+              </button>
+            </div>
+            <app-add-edit-emp [emp]="emp" *ngIf="ActivateAddEditEmpComp">
+            </app-add-edit-emp>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

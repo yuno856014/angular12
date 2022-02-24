@@ -1,0 +1,18 @@
+<kendo-treelist
+  [kendoTreeListFlatBinding]="DepartmentList"
+  kendoTreeListExpandable
+  childrenField="contents"
+  field="id"
+  style="width: 260px"
+  scrollable="none"
+>
+  <kendo-treelist-column
+    [expandable]="true"
+    field="departmentName"
+    title="Tổng công ty nhân sự việt nam"
+  >
+  <ng-template kendoTreelistTemplate let-DepartmentList>
+      <a [routerLink]="['/employee/',+ DepartmentList.id]" ></a>
+  </ng-template>
+  </kendo-treelist-column>
+</kendo-treelist>

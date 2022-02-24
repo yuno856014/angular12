@@ -1,0 +1,77 @@
+<div class="modal-body">
+  <div class="form-froup row" style="padding-bottom: 4%">
+    <label class="col-sm-4 col-form-label"
+      ></label
+    >
+   <div class="col-sm-8 row">
+    <img class="col-sm-5"
+    [src]="PhotoFilePath"
+    style="object-fit: cover;padding: 2%;"
+    height="150px;"
+    width="100px;"
+  />
+  <input type="file" (change)="uploadPhoto($event)" class="mt-2 col-sm-7" />
+   </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-froup row" *ngIf="emp.id != 0">
+        <label class="form-label col-sm-4 ">
+          <span style="color: red">(*)</span> Mã NV</label>
+        <input type="text" class="form-control col-sm-8 " [(ngModel)]="id" disabled />
+      </div>
+      <div class="form-froup row">
+        <label class="form-label col-sm-4"><span style="color: red">(*)</span> Họ</label>
+        <input type="text" class="col-sm-8 form-control" [(ngModel)]="empLastName" />
+      </div>
+      <div class="form-froup row">
+        <label class="form-label col-sm-4"
+          ><span style="color: red">(*)</span> Tên</label
+        >
+        <input type="text" class="form-control col-sm-8" [(ngModel)]="empName" />
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-froup row">
+        <label class="form-label col-sm-4"
+          ><span style="color: red">(*)</span> Phòng Ban</label
+        >
+        <select class="form-control col-sm-8" [(ngModel)]="departmentId">
+          <option value="0" hidden>--Select--</option>
+          <option
+            *ngFor="let depName of DepartmentList"
+            value="{{ depName.id }}"
+          >
+            {{ depName.departmentName }}
+          </option>
+        </select>
+      </div>
+      <div class="form-froup row">
+        <label class="form-label col-sm-4"
+          ><span style="color: red">(*)</span> Chức vụ</label
+        >
+        <input type="text" class="form-control col-sm-8" [(ngModel)]="position" />
+      </div>
+      <div class="form-froup row">
+        <label class="form-label col-sm-4"
+          ><span style="color: red">(*)</span> Chức danh</label
+        >
+        <input type="text" class="form-control col-sm-8" [(ngModel)]="title" />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button (click)="addEmployee()" *ngIf="emp.id == 0" class="btn btn-primary">
+    Thêm
+  </button>
+  <button
+    (click)="updateEmployee()"
+    *ngIf="emp.id != 0"
+    class="btn btn-primary"
+  >
+    Lưu
+  </button>
+  <a (click)="deleteClick(emp.id)" *ngIf="emp.id != 0" class="btn btn-danger"> Xóa </a>
+  <a (click)="closeClick()" class="btn btn-secondary" data-dismiss="modal">Đóng </a>
+</div>
